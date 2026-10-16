@@ -1,7 +1,8 @@
+import 'dotenv/config';
 import mongoose from 'mongoose';
 
-const url = ''; // String de conexión local TODO
-const dbName = ''; // Nombre de la base de datos TODO
+const url = process.env.MONGODB_URI;
+const dbName = process.env.DB_NAME;
 
 // Definición del esquema TODO
 const exampleSchema = new mongoose.Schema(
