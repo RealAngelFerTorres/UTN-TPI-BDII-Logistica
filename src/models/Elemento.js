@@ -13,8 +13,14 @@ function esHT() {
 function esMovil() {
   return this.tipo_elemento === 'Móvil';
 }
-const soloHT = { validator: esHT, message: '{PATH} solo aplica a elementos de tipo HT' };
-const soloMovil = { validator: esMovil, message: '{PATH} solo aplica a elementos de tipo Móvil' };
+const soloHT = {
+  validator: esHT,
+  message: '{PATH} solo aplica a elementos de tipo HT',
+};
+const soloMovil = {
+  validator: esMovil,
+  message: '{PATH} solo aplica a elementos de tipo Móvil',
+};
 
 const elementoSchema = new mongoose.Schema(
   {
@@ -24,14 +30,23 @@ const elementoSchema = new mongoose.Schema(
     modelo: { type: String, required: true, trim: true },
     estado: { type: String, enum: ESTADOS, default: 'operativo' },
     // Linking: quién tiene el elemento hoy (null = está en base)
-    asignado_a: { type: mongoose.Schema.Types.ObjectId, ref: 'Personal', default: null },
+    asignado_a: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Personal',
+      default: null,
+    },
     observaciones: { type: String, default: '' },
 
     // Solo HT
     nro_serie: { type: String, trim: true, required: esHT, validate: soloHT },
 
     // Solo móviles
-    subtipo: { type: String, enum: SUBTIPOS_MOVIL, required: esMovil, validate: soloMovil },
+    subtipo: {
+      type: String,
+      enum: SUBTIPOS_MOVIL,
+      required: esMovil,
+      validate: soloMovil,
+    },
     dominio: {
       type: String,
       trim: true,
@@ -42,7 +57,12 @@ const elementoSchema = new mongoose.Schema(
       },
       validate: soloMovil,
     },
-    ploteado: { type: String, enum: PLOTEADOS, required: esMovil, validate: soloMovil },
+    ploteado: {
+      type: String,
+      enum: PLOTEADOS,
+      required: esMovil,
+      validate: soloMovil,
+    },
 
     // Baja lógica: el documento nunca se borra, se marca.
     isEliminado: { type: Boolean, default: false },
@@ -61,9 +81,15 @@ elementoSchema.index(
 
 // Red de seguridad: el borrado físico queda bloqueado a nivel modelo.
 function prohibirBorradoFisico() {
-  throw new Error('Borrado físico prohibido en elementos: usar la baja lógica (eliminarElemento)');
+  throw new Error(
+    'Borrado físico prohibido en elementos: usar la baja lógica (eliminarElemento)',
+  );
 }
-elementoSchema.pre('deleteOne', { document: true, query: true }, prohibirBorradoFisico);
+elementoSchema.pre(
+  'deleteOne',
+  { document: true, query: true },
+  prohibirBorradoFisico,
+);
 elementoSchema.pre(['deleteMany', 'findOneAndDelete'], prohibirBorradoFisico);
 
 export const Elemento = mongoose.model('Elemento', elementoSchema);
