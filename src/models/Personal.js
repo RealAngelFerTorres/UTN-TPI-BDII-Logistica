@@ -13,12 +13,35 @@ export const JERARQUIAS = [
 
 const personalSchema = new mongoose.Schema(
   {
-    lp: { type: Number, required: true }, // legajo personal
+    lp: {
+      type: Number,
+      required: true,
+      max: [9999999, '{PATH} no puede tener más de 7 números.'],
+    }, // legajo personal
     jerarquia: { type: String, enum: JERARQUIAS, required: true },
-    dni: { type: String, required: true, trim: true },
-    apellido: { type: String, required: true, trim: true },
-    nombre: { type: String, required: true, trim: true },
-    observaciones: { type: String, default: '' },
+    dni: {
+      type: String,
+      required: true,
+      trim: true,
+      maxlength: [9, '{PATH} no puede tener más de 9 caracteres.'],
+    },
+    apellido: {
+      type: String,
+      required: true,
+      trim: true,
+      maxlength: [80, '{PATH} no puede superar los 80 caracteres.'],
+    },
+    nombre: {
+      type: String,
+      required: true,
+      trim: true,
+      maxlength: [100, '{PATH} no puede superar los 100 caracteres.'],
+    },
+    observaciones: {
+      type: String,
+      default: '',
+      maxlength: [500, '{PATH} no puede superar los 500 caracteres.'],
+    },
 
     // Baja lógica
     isEliminado: { type: Boolean, default: false },
