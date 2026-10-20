@@ -1,4 +1,11 @@
 {
+  "type": "module",
+  "scripts": {
+    "start": "node logistica-back.js",
+    "seed": "node scripts/seed.js",
+    "demo:elementos": "node scripts/demo-elementos.js",
+    "test:modelo": "node scripts/test-modelo.js"
+  },
   "dependencies": {
     "dotenv": "^18.0.8",
     "mongoose": "^9.11.2"
