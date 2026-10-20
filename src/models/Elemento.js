@@ -25,9 +25,27 @@ const soloMovil = {
 const elementoSchema = new mongoose.Schema(
   {
     tipo_elemento: { type: String, enum: TIPOS_ELEMENTO, required: true },
-    interno: { type: String, required: true, trim: true },
-    marca: { type: String, required: true, trim: true },
-    modelo: { type: String, required: true, trim: true },
+    interno: {
+      type: String,
+      required: true,
+      trim: true,
+      minlength: [1, '{PATH} no puede estar vacío.'],
+      maxlength: [8, '{PATH} no puede superar los 8 caracteres.'],
+    },
+    marca: {
+      type: String,
+      required: true,
+      trim: true,
+      minlength: [1, '{PATH} no puede estar vacío.'],
+      maxlength: [30, '{PATH} no puede superar los 30 caracteres.'],
+    },
+    modelo: {
+      type: String,
+      required: true,
+      trim: true,
+      minlength: [1, '{PATH} no puede estar vacío.'],
+      maxlength: [50, '{PATH} no puede superar los 50 caracteres.'],
+    },
     estado: { type: String, enum: ESTADOS, default: 'operativo' },
     // Linking: quién tiene el elemento hoy (null = está en base)
     asignado_a: {
@@ -35,10 +53,21 @@ const elementoSchema = new mongoose.Schema(
       ref: 'Personal',
       default: null,
     },
-    observaciones: { type: String, default: '' },
+    observaciones: {
+      type: String,
+      default: '',
+      maxlength: [500, '{PATH} no puede superar los 500 caracteres.'],
+    },
 
     // Solo HT
-    nro_serie: { type: String, trim: true, required: esHT, validate: soloHT },
+    nro_serie: {
+      type: String,
+      trim: true,
+      required: esHT,
+      validate: soloHT,
+      minlength: [1, '{PATH} no puede estar vacío.'],
+      maxlength: [20, '{PATH} no puede superar los 20 caracteres.'],
+    },
 
     // Solo móviles
     subtipo: {
@@ -51,6 +80,8 @@ const elementoSchema = new mongoose.Schema(
       type: String,
       trim: true,
       uppercase: true,
+      minlength: [1, '{PATH} no puede estar vacío.'],
+      maxlength: [7, '{PATH} no puede superar los 7 caracteres.'],
       // las bicicletas no tienen patente
       required() {
         return esMovil.call(this) && this.subtipo !== 'bicicleta';
@@ -67,7 +98,11 @@ const elementoSchema = new mongoose.Schema(
     // Baja lógica: el documento nunca se borra, se marca.
     isEliminado: { type: Boolean, default: false },
     fecha_eliminacion: { type: Date },
-    motivo_eliminacion: { type: String },
+    motivo_eliminacion: {
+      type: String,
+      minlength: [1, '{PATH} no puede estar vacío.'],
+      maxlength: [500, '{PATH} no puede superar los 500 caracteres.'],
+    },
   },
   { collection: 'elementos', versionKey: false },
 );
