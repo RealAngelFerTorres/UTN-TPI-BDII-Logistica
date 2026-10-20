@@ -12,13 +12,13 @@ async function main() {
   await conectar();
 
   titulo('1. CREATE: alta de un HT nuevo');
-  const interno = `HT-9${String(Date.now()).slice(-2)}`;
+  const interno = `20270${String(Date.now()).slice(-2)}`;
   const ht = await crearElemento({
     tipo_elemento: 'HT',
     interno,
     marca: 'Motorola',
     modelo: 'MTP 3250',
-    nro_serie: `SN-DEMO-${Date.now()}`,
+    nro_serie: `SN-${Date.now()}`,
     observaciones: 'Cargado por demo-elementos.js',
   });
   console.log(ht.toObject());
@@ -27,7 +27,7 @@ async function main() {
   try {
     await crearElemento({
       tipo_elemento: 'HT',
-      interno: 'HT-X',
+      interno: '2033079',
       marca: 'Motorola',
       modelo: 'MTP 3250',
       dominio: 'AA000AA',
