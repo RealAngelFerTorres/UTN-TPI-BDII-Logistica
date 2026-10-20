@@ -25,7 +25,13 @@ async function main() {
 
   titulo('2. CREATE con datos inválidos (HT sin nro_serie y con dominio)');
   try {
-    await crearElemento({ tipo_elemento: 'HT', interno: 'HT-X', marca: 'Motorola', modelo: 'MTP 3250', dominio: 'AA000AA' });
+    await crearElemento({
+      tipo_elemento: 'HT',
+      interno: 'HT-X',
+      marca: 'Motorola',
+      modelo: 'MTP 3250',
+      dominio: 'AA000AA',
+    });
   } catch (error) {
     console.log('Rechazado:', error.message);
   }
@@ -41,7 +47,10 @@ async function main() {
   });
 
   titulo('4. El documento sigue existiendo en Atlas');
-  console.log('findById ->', (await Elemento.findById(ht._id)) ? 'encontrado' : 'no existe');
+  console.log(
+    'findById ->',
+    (await Elemento.findById(ht._id)) ? 'encontrado' : 'no existe',
+  );
 
   titulo('5. Intento de borrado físico (tiene que fallar)');
   try {
@@ -51,7 +60,10 @@ async function main() {
   }
 
   titulo('6. No se puede dar de baja un elemento asignado');
-  const asignado = await Elemento.findOne({ isEliminado: false, asignado_a: { $ne: null } });
+  const asignado = await Elemento.findOne({
+    isEliminado: false,
+    asignado_a: { $ne: null },
+  });
   if (asignado) {
     try {
       await eliminarElemento(asignado._id, 'Prueba');
@@ -65,7 +77,9 @@ async function main() {
   titulo('7. Resumen de la colección');
   const total = await Elemento.countDocuments();
   const activos = await Elemento.countDocuments({ isEliminado: false });
-  console.log(`total: ${total} | activos: ${activos} | dados de baja: ${total - activos}`);
+  console.log(
+    `total: ${total} | activos: ${activos} | dados de baja: ${total - activos}`,
+  );
 }
 
 try {
