@@ -6,28 +6,156 @@ import { Elemento } from '../src/models/Elemento.js';
 import { crearElemento } from '../src/elementos.js';
 
 const personal = [
-  { lp: 4521, jerarquia: 'Oficial Primero', dni: '30123456', apellido: 'Gómez', nombre: 'Carlos' },
-  { lp: 3310, jerarquia: 'Inspector', dni: '27456789', apellido: 'Fernández', nombre: 'Laura' },
-  { lp: 5102, jerarquia: 'Oficial', dni: '38901234', apellido: 'Ruiz', nombre: 'Martín' },
-  { lp: 4877, jerarquia: 'Oficial Mayor', dni: '33567890', apellido: 'Sosa', nombre: 'Valeria' },
-  { lp: 2045, jerarquia: 'Principal', dni: '25678901', apellido: 'Benítez', nombre: 'Jorge' },
-  { lp: 5230, jerarquia: 'Oficial', dni: '40112233', apellido: 'Acosta', nombre: 'Paula' },
+  {
+    lp: 4521,
+    jerarquia: 'Oficial Primero',
+    dni: '30123456',
+    apellido: 'Gómez',
+    nombre: 'Carlos',
+  },
+  {
+    lp: 3310,
+    jerarquia: 'Inspector',
+    dni: '27456789',
+    apellido: 'Fernández',
+    nombre: 'Laura',
+  },
+  {
+    lp: 5102,
+    jerarquia: 'Oficial',
+    dni: '38901234',
+    apellido: 'Ruiz',
+    nombre: 'Martín',
+  },
+  {
+    lp: 4877,
+    jerarquia: 'Oficial Mayor',
+    dni: '33567890',
+    apellido: 'Sosa',
+    nombre: 'Valeria',
+  },
+  {
+    lp: 2045,
+    jerarquia: 'Principal',
+    dni: '25678901',
+    apellido: 'Benítez',
+    nombre: 'Jorge',
+  },
+  {
+    lp: 5230,
+    jerarquia: 'Oficial',
+    dni: '40112233',
+    apellido: 'Acosta',
+    nombre: 'Paula',
+  },
 ];
 
 // asignado_lp se traduce al _id del personal antes de insertar
 const elementos = [
-  { tipo_elemento: 'HT', interno: 'HT-010', marca: 'Motorola', modelo: 'MTP 3250', nro_serie: 'SN-884201' },
-  { tipo_elemento: 'HT', interno: 'HT-011', marca: 'Motorola', modelo: 'MTP 3250', nro_serie: 'SN-884207', asignado_lp: 5102 },
-  { tipo_elemento: 'HT', interno: 'HT-012', marca: 'Motorola', modelo: 'MTP 3250', nro_serie: 'SN-884213', asignado_lp: 4521 },
-  { tipo_elemento: 'HT', interno: 'HT-013', marca: 'Sepura', modelo: 'STP9080', nro_serie: 'SP-220931' },
-  { tipo_elemento: 'HT', interno: 'HT-014', marca: 'Sepura', modelo: 'STP9080', nro_serie: 'SP-220945', estado: 'en reparación', observaciones: 'No carga la batería' },
-  { tipo_elemento: 'HT', interno: 'HT-015', marca: 'Motorola', modelo: 'MTP 3250', nro_serie: 'SN-884230', estado: 'en préstamo', observaciones: 'Prestado a otra dependencia' },
-  { tipo_elemento: 'Móvil', subtipo: 'camioneta', interno: 'M-045', marca: 'Ford', modelo: 'Ranger', dominio: 'AB123CD', ploteado: 'Identificable' },
-  { tipo_elemento: 'Móvil', subtipo: 'camioneta', interno: 'M-046', marca: 'Nissan', modelo: 'Frontier', dominio: 'AC456EF', ploteado: 'Identificable', asignado_lp: 4877 },
-  { tipo_elemento: 'Móvil', subtipo: 'móvil', interno: 'M-050', marca: 'Peugeot', modelo: '208', dominio: 'AD789GH', ploteado: 'No identificable' },
-  { tipo_elemento: 'Móvil', subtipo: 'móvil', interno: 'M-051', marca: 'Ford', modelo: 'Focus', dominio: 'ABC123', ploteado: 'Identificable', estado: 'radiado' },
-  { tipo_elemento: 'Móvil', subtipo: 'moto', interno: 'MT-07', marca: 'Yamaha', modelo: 'XTZ 250', dominio: 'A123BCD', ploteado: 'Identificable', asignado_lp: 3310 },
-  { tipo_elemento: 'Móvil', subtipo: 'bicicleta', interno: 'B-02', marca: 'Zenith', modelo: 'Urbana', ploteado: 'Identificable' },
+  {
+    tipo_elemento: 'HT',
+    interno: '2033077',
+    marca: 'Motorola',
+    modelo: 'MTP 3250',
+    nro_serie: '893TTF8574',
+  },
+  {
+    tipo_elemento: 'HT',
+    interno: '2033078',
+    marca: 'Motorola',
+    modelo: 'MTP 3250',
+    nro_serie: '893TTH1815',
+    asignado_lp: 5102,
+  },
+  {
+    tipo_elemento: 'HT',
+    interno: '2033079',
+    marca: 'Motorola',
+    modelo: 'MTP 3250',
+    nro_serie: '893TTK1875',
+    asignado_lp: 4521,
+  },
+  {
+    tipo_elemento: 'HT',
+    interno: '2027514',
+    marca: 'Sepura',
+    modelo: 'STP9080',
+    nro_serie: '1PRG01723G8K20Y',
+  },
+  {
+    tipo_elemento: 'HT',
+    interno: '2027515',
+    marca: 'Sepura',
+    modelo: 'STP9080',
+    nro_serie: '1PRG01723G8K293',
+    estado: 'en reparación',
+    observaciones: 'No carga la batería',
+  },
+  {
+    tipo_elemento: 'HT',
+    interno: '2033079',
+    marca: 'Motorola',
+    modelo: 'MTP 3250',
+    nro_serie: '893TTR2883',
+    estado: 'en préstamo',
+    observaciones: 'Prestado a otra dependencia',
+  },
+  {
+    tipo_elemento: 'Móvil',
+    subtipo: 'camioneta',
+    interno: '1045',
+    marca: 'Ford',
+    modelo: 'Ranger',
+    dominio: 'AB123CD',
+    ploteado: 'Identificable',
+  },
+  {
+    tipo_elemento: 'Móvil',
+    subtipo: 'camioneta',
+    interno: '2046',
+    marca: 'Nissan',
+    modelo: 'Frontier',
+    dominio: 'AC456EF',
+    ploteado: 'Identificable',
+    asignado_lp: 4877,
+  },
+  {
+    tipo_elemento: 'Móvil',
+    subtipo: 'móvil',
+    interno: '5550',
+    marca: 'Peugeot',
+    modelo: '208',
+    dominio: 'AD789GH',
+    ploteado: 'No identificable',
+  },
+  {
+    tipo_elemento: 'Móvil',
+    subtipo: 'móvil',
+    interno: '5199',
+    marca: 'Ford',
+    modelo: 'Focus',
+    dominio: 'ABC123',
+    ploteado: 'Identificable',
+    estado: 'radiado',
+  },
+  {
+    tipo_elemento: 'Móvil',
+    subtipo: 'moto',
+    interno: '3307',
+    marca: 'Yamaha',
+    modelo: 'XTZ 250',
+    dominio: 'A123BCD',
+    ploteado: 'Identificable',
+    asignado_lp: 3310,
+  },
+  {
+    tipo_elemento: 'Móvil',
+    subtipo: 'bicicleta',
+    interno: 'B212',
+    marca: 'Zenith',
+    modelo: 'Urbana',
+    ploteado: 'Identificable',
+  },
 ];
 
 async function main() {
@@ -44,17 +172,28 @@ async function main() {
     }
     idPorLp.set(p.lp, doc._id);
   }
-  console.log(`personal: ${nuevos} insertados, ${personal.length - nuevos} ya existían`);
+  console.log(
+    `personal: ${nuevos} insertados, ${personal.length - nuevos} ya existían`,
+  );
 
   nuevos = 0;
   for (const { asignado_lp, ...e } of elementos) {
-    const existe = await Elemento.exists({ tipo_elemento: e.tipo_elemento, interno: e.interno, isEliminado: false });
+    const existe = await Elemento.exists({
+      tipo_elemento: e.tipo_elemento,
+      interno: e.interno,
+      isEliminado: false,
+    });
     if (!existe) {
-      await crearElemento({ ...e, asignado_a: asignado_lp ? idPorLp.get(asignado_lp) : null });
+      await crearElemento({
+        ...e,
+        asignado_a: asignado_lp ? idPorLp.get(asignado_lp) : null,
+      });
       nuevos++;
     }
   }
-  console.log(`elementos: ${nuevos} insertados, ${elementos.length - nuevos} ya existían`);
+  console.log(
+    `elementos: ${nuevos} insertados, ${elementos.length - nuevos} ya existían`,
+  );
 }
 
 try {
