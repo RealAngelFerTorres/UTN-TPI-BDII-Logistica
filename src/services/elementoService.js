@@ -1,21 +1,17 @@
 import mongoose from 'mongoose';
-import { Elemento } from './models/Elemento.js';
-import { Personal } from './models/Personal.js';
+import { Elemento } from '../models/Elemento.js';
 
 // CREATE: da de alta un HT o un móvil.
+// Todo elemento nace en base: se ignora cualquier asignado_a que venga en los datos.
+// La asignación se hace después, registrando una Salida en movimientos.
 export async function crearElemento(datos) {
-  if (datos.asignado_a) {
-    const persona = await Personal.findOne({ _id: datos.asignado_a, isEliminado: false });
-    if (!persona) {
-      throw new Error('asignado_a no corresponde a ningún personal activo');
-    }
-  }
-
   try {
-    return await Elemento.create(datos);
+    return await Elemento.create({ ...datos, asignado_a: null });
   } catch (error) {
     if (error.code === 11000) {
-      throw new Error(`Ya existe un ${datos.tipo_elemento} activo con interno ${datos.interno}`);
+      throw new Error(
+        `Ya existe un ${datos.tipo_elemento} activo con interno ${datos.interno}`,
+      );
     }
     throw error;
   }
@@ -54,7 +50,9 @@ export async function eliminarElemento(id, motivo) {
     { returnDocument: 'after' },
   );
   if (!actualizado) {
-    throw new Error('El elemento cambió mientras se procesaba la baja; volver a intentar');
+    throw new Error(
+      'El elemento cambió mientras se procesaba la baja; volver a intentar',
+    );
   }
   return actualizado;
 }
