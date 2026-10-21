@@ -2,7 +2,10 @@
 // Sirve para sacar las capturas del informe y para mostrar en el coloquio.
 import { conectar, desconectar } from '../src/db.js';
 import { Elemento } from '../src/models/Elemento.js';
-import { crearElemento, eliminarElemento } from '../src/elementos.js';
+import {
+  crearElemento,
+  eliminarElemento,
+} from '../src/services/elementoService.js';
 
 function titulo(texto) {
   console.log(`\n=== ${texto} ===`);
