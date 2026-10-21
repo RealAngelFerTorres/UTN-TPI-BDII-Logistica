@@ -46,3 +46,10 @@ Write-Host "Backup completado: $destino\$($env:DB_NAME)"
 # Script para restaurar la base de datos de prueba desde el resguardo
 # Se tiene que cambiar la fecha en la ruta del resguardo según corresponda
 mongorestore --uri="$env:MONGODB_URI" --nsFrom="logistica.*" --nsTo="logistica_test.*" .\resguardos_tpi\2026-10-20
+
+
+# Script para medir el RTO (Recovery Time Objective) de la restauración de la base de datos de prueba
+# Se tiene que cambiar la fecha en la ruta del resguardo según corresponda
+Measure-Command {
+  mongorestore --uri="$env:MONGODB_URI" --nsFrom="logistica.*" --nsTo="logistica_test.*" .\resguardos_tpi\2026-10-20
+}
