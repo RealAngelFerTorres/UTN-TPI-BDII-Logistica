@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 export const TIPOS_ELEMENTO = ['HT', 'Móvil'];
-export const ESTADOS = ['operativo', 'radiado', 'en reparación', 'en préstamo'];
+export const ESTADOS = ['Operativo', 'Radiado', 'En reparación', 'En préstamo'];
 export const SUBTIPOS_MOVIL = ['camioneta', 'móvil', 'moto', 'bicicleta'];
 export const PLOTEADOS = ['Identificable', 'No identificable'];
 
@@ -46,7 +46,7 @@ const elementoSchema = new mongoose.Schema(
       minlength: [1, '{PATH} no puede estar vacío.'],
       maxlength: [50, '{PATH} no puede superar los 50 caracteres.'],
     },
-    estado: { type: String, enum: ESTADOS, default: 'operativo' },
+    estado: { type: String, enum: ESTADOS, default: 'Operativo' },
     // Linking: quién tiene el elemento hoy (null = está en base)
     asignado_a: {
       type: mongoose.Schema.Types.ObjectId,

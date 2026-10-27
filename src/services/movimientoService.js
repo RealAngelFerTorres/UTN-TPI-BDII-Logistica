@@ -56,7 +56,7 @@ export async function crearMovimiento(datos) {
       // Reglas de negocio
       for (const elemento of elementos) {
         if (esSalida) {
-          if (elemento.estado !== 'operativo') {
+          if (elemento.estado !== 'Operativo') {
             throw new Error(
               `El elemento ${elemento.interno} no está operativo (${elemento.estado}): no puede salir`,
             );
@@ -111,7 +111,7 @@ export async function crearMovimiento(datos) {
           _id: { $in: ids },
           isEliminado: false,
           asignado_a: esSalida ? null : asignado,
-          ...(esSalida && { estado: 'operativo' }),
+          ...(esSalida && { estado: 'Operativo' }),
         },
         { $set: { asignado_a: esSalida ? asignado : null } },
         { session },

@@ -93,7 +93,7 @@ const elementos = [
     marca: 'Sepura',
     modelo: 'STP9080',
     nro_serie: '1PRG0000ZZ00202',
-    estado: 'en reparación',
+    estado: 'En reparación',
     observaciones: 'No carga la batería',
   },
   {
@@ -102,7 +102,7 @@ const elementos = [
     marca: 'Motorola',
     modelo: 'MTP 3250',
     nro_serie: '893TTZ0104',
-    estado: 'en préstamo',
+    estado: 'En préstamo',
     observaciones: 'Prestado a otra dependencia',
   },
   {
@@ -140,7 +140,7 @@ const elementos = [
     modelo: 'Focus',
     dominio: 'ABC123',
     ploteado: 'Identificable',
-    estado: 'radiado',
+    estado: 'Radiado',
   },
   {
     tipo_elemento: 'Móvil',

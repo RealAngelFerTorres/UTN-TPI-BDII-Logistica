@@ -65,7 +65,7 @@ probar(Elemento, [
 const nuevo = new Elemento(camioneta);
 assert.equal(nuevo.dominio, 'AB123CD');
 assert.equal(nuevo.isEliminado, false);
-assert.equal(nuevo.estado, 'operativo');
+assert.equal(nuevo.estado, 'Operativo');
 assert.equal(nuevo.asignado_a, null);
 console.log('ok - Elemento: valores por defecto y dominio en mayúsculas');
 
@@ -133,7 +133,7 @@ probar(Movimiento, [
 ]);
 
 // ---------- Borrado físico bloqueado ----------
-for (const Modelo of [Elemento, Movimiento]) {
+for (const Modelo of [Elemento, Personal, Movimiento]) {
   await assert.rejects(() => Modelo.deleteOne({}), /Borrado físico prohibido/);
   await assert.rejects(() => Modelo.deleteMany({}), /Borrado físico prohibido/);
   await assert.rejects(
