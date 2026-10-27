@@ -24,7 +24,7 @@ UTN-TPI-BDII-Logistica/
 │   │   └── Movimiento.js         → Esquema de movimientos (salidas y entradas)
 │   └── services/
 │       ├── elementoService.js    → CREATE y DELETE lógico de elementos
-│       ├── personalService.js    → Búsqueda de personal activo
+│       ├── personalService.js    → Búsqueda y DELETE lógico de personal
 │       └── movimientoService.js  → CREATE, READ, UPDATE y DELETE lógico de movimientos
 └── scripts/
     ├── seed.js                   → Carga datos de prueba ficticios

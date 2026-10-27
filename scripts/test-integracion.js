@@ -10,6 +10,7 @@ import {
   crearElemento,
   eliminarElemento,
 } from '../src/services/elementoService.js';
+import { eliminarPersonal } from '../src/services/personalService.js';
 import {
   crearMovimiento,
   listarMovimientos,
@@ -38,7 +39,7 @@ async function main() {
   ]);
   const ht = await crearElemento({ tipo_elemento: 'HT', interno: `T${sufijo}`, marca: 'Motorola', modelo: 'MTP 3250', nro_serie: `S${sufijo}` });
   const movil = await crearElemento({ tipo_elemento: 'Móvil', subtipo: 'camioneta', interno: `T${sufijo}`, marca: 'Ford', modelo: 'Ranger', dominio: 'AA000AA', ploteado: 'Identificable' });
-  const roto = await crearElemento({ tipo_elemento: 'HT', interno: `R${sufijo}`, marca: 'Sepura', modelo: 'STP9080', nro_serie: `R${sufijo}`, estado: 'en reparación' });
+  const roto = await crearElemento({ tipo_elemento: 'HT', interno: `R${sufijo}`, marca: 'Sepura', modelo: 'STP9080', nro_serie: `R${sufijo}`, estado: 'En reparación' });
 
   const base = {
     fecha: new Date(),
@@ -105,6 +106,12 @@ async function main() {
   );
   ok('Entrada: solo la registra quien tiene el elemento');
 
+  await assert.rejects(
+    () => eliminarPersonal(agente._id, 'Pase a otra dependencia'),
+    /tiene elementos asignados/,
+  );
+  ok('eliminarPersonal: no da de baja a quien tiene elementos asignados');
+
   await entrada([ht._id, movil._id], { hora: '19:00' });
   assert.equal(await asignadoA(ht), null);
   assert.equal(await asignadoA(movil), null);
@@ -140,6 +147,16 @@ async function main() {
 
   await crearElemento({ tipo_elemento: 'HT', interno: `T${sufijo}`, marca: 'Motorola', modelo: 'MTP 3250', nro_serie: `N${sufijo}` });
   ok('Índice parcial: el interno de un elemento dado de baja se puede reutilizar');
+
+  // ---------- DELETE lógico de personal ----------
+  const baja = await eliminarPersonal(otroAgente._id, 'Pase a otra dependencia');
+  assert.equal(baja.isEliminado, true);
+  assert.ok(baja.fecha_eliminacion instanceof Date);
+  await assert.rejects(
+    () => salida([libre._id], { asignado: otroAgente._id }),
+    /No existe un personal activo/,
+  );
+  ok('eliminarPersonal: baja lógica con fecha; ya no puede recibir elementos');
 
   console.log('\nTodas las pruebas de integración pasan.');
 }
