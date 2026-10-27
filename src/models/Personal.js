@@ -15,9 +15,9 @@ const personalSchema = new mongoose.Schema(
   {
     lp: {
       type: Number,
-      trim: true,
       required: true,
-      minlength: [1, '{PATH} no puede estar vacío.'],
+      // trim y minlength no aplican a Number: se valida con min/max
+      min: [1, '{PATH} tiene que ser un número positivo.'],
       max: [9999999, '{PATH} no puede tener más de 7 números.'],
     }, // legajo personal
     jerarquia: { type: String, enum: JERARQUIAS, required: true },
