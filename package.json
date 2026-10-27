@@ -1,10 +1,10 @@
 {
   "type": "module",
   "scripts": {
-    "start": "node logistica-back.js",
     "seed": "node scripts/seed.js",
     "demo:elementos": "node scripts/demo-elementos.js",
-    "test:modelo": "node scripts/test-modelo.js"
+    "test:modelo": "node scripts/test-modelo.js",
+    "test:integracion": "node scripts/test-integracion.js"
   },
   "dependencies": {
     "dotenv": "^18.0.8",
