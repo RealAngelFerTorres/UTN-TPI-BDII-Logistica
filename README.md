@@ -15,18 +15,23 @@ Este repositorio almacena el código solicitado en el Trabajo Práctico Integrad
 
 ```text
 UTN-TPI-BDII-Logistica/
-├── logistica-back.js          → Script backend de la app (punto de entrada)
-├── .env.example               → Plantilla de variables de entorno (copiar como .env)
+├── .env.example                  → Plantilla de variables de entorno (copiar como .env)
 ├── src/
-│   ├── db.js                  → Conexión a MongoDB Atlas
-│   ├── elementos.js           → CREATE y DELETE lógico de elementos
-│   └── models/
-│       ├── Elemento.js        → Esquema de elementos (HT y móviles)
-│       └── Personal.js        → Esquema de personal
+│   ├── db.js                     → Conexión a MongoDB Atlas
+│   ├── models/
+│   │   ├── Elemento.js           → Esquema de elementos (HT y móviles)
+│   │   ├── Personal.js           → Esquema de personal
+│   │   └── Movimiento.js         → Esquema de movimientos (salidas y entradas)
+│   └── services/
+│       ├── elementoService.js    → CREATE y DELETE lógico de elementos
+│       ├── personalService.js    → Búsqueda de personal activo
+│       └── movimientoService.js  → CREATE, READ, UPDATE y DELETE lógico de movimientos
 └── scripts/
-    ├── seed.js                → Carga datos de prueba ficticios
-    ├── demo-elementos.js      → Demo de alta y baja lógica contra Atlas
-    └── test-modelo.js         → Prueba las validaciones sin conectarse
+    ├── seed.js                   → Carga datos de prueba ficticios
+    ├── demo-elementos.js         → Demo de alta y baja lógica contra Atlas
+    ├── test-modelo.js            → Prueba las validaciones sin conectarse
+    ├── test-integracion.js       → Prueba los servicios contra Atlas (base logistica_pruebas)
+    └── backup.ps1                → Backup con mongodump en resguardos_tpi/<fecha>
 ```
 
 ## 💻 Ejecución del proyecto
@@ -37,7 +42,8 @@ UTN-TPI-BDII-Logistica/
 
 | Comando | Qué hace |
 | --- | --- |
-| `npm run test:modelo` | Valida el esquema de elementos (no necesita Atlas) |
-| `npm run seed` | Carga personal y elementos ficticios (se puede repetir sin duplicar) |
+| `npm run test:modelo` | Valida los esquemas (no necesita Atlas) |
+| `npm run seed` | Carga personal, elementos y movimientos ficticios (se puede repetir sin duplicar) |
 | `npm run demo:elementos` | Crea un HT, lo da de baja lógica y muestra que sigue en la base |
-| `npm start` | App principal |
+| `npm run test:integracion` | Prueba las reglas de negocio de los servicios contra Atlas |
+| `.\scripts\backup.ps1` | Genera el backup en `resguardos_tpi/<fecha>` (requiere MongoDB Database Tools) |
