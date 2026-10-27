@@ -48,10 +48,29 @@ const personalSchema = new mongoose.Schema(
       maxlength: [500, '{PATH} no puede superar los 500 caracteres.'],
     },
 
-    // Baja lógica
+    // Baja lógica: el documento nunca se borra, se marca.
     isEliminado: { type: Boolean, default: false },
+    fecha_eliminacion: { type: Date },
+    motivo_eliminacion: {
+      type: String,
+      minlength: [1, '{PATH} no puede estar vacío.'],
+      maxlength: [500, '{PATH} no puede superar los 500 caracteres.'],
+    },
   },
   { collection: 'personal', versionKey: false },
 );
+
+// Red de seguridad: el borrado físico queda bloqueado a nivel modelo.
+function prohibirBorradoFisico() {
+  throw new Error(
+    'Borrado físico prohibido en personal: usar la baja lógica (eliminarPersonal)',
+  );
+}
+personalSchema.pre(
+  'deleteOne',
+  { document: true, query: true },
+  prohibirBorradoFisico,
+);
+personalSchema.pre(['deleteMany', 'findOneAndDelete'], prohibirBorradoFisico);
 
 export const Personal = mongoose.model('Personal', personalSchema);
