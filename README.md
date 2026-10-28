@@ -40,10 +40,10 @@ UTN-TPI-BDII-Logistica/
 2. Copiar `.env.example` como `.env` y completar `MONGODB_URI` con el connection string de Atlas.
 3. Comandos disponibles:
 
-| Comando | Qué hace |
-| --- | --- |
-| `npm run test:modelo` | Valida los esquemas (no necesita Atlas) |
-| `npm run seed` | Carga personal, elementos y movimientos ficticios (se puede repetir sin duplicar) |
-| `npm run demo:elementos` | Crea un HT, lo da de baja lógica y muestra que sigue en la base |
-| `npm run test:integracion` | Prueba las reglas de negocio de los servicios contra Atlas |
-| `.\scripts\backup.ps1` | Genera el backup en `resguardos_tpi/<fecha>` (requiere MongoDB Database Tools) |
+| Comando                    | Qué hace                                                                          |
+| -------------------------- | --------------------------------------------------------------------------------- |
+| `npm run test:modelo`      | Valida los esquemas (no necesita Atlas)                                           |
+| `npm run seed`             | Carga personal, elementos y movimientos ficticios (se puede repetir sin duplicar) |
+| `npm run demo:elementos`   | Crea un HT, lo da de baja lógica y muestra que sigue en la base                   |
+| `npm run test:integracion` | Prueba las reglas de negocio de los servicios contra Atlas                        |
+| `.\scripts\backup.ps1`     | Genera el backup en `resguardos_tpi/<fecha>` (requiere MongoDB Database Tools)    |

@@ -5,12 +5,16 @@ import mongoose from 'mongoose';
 export async function conectar() {
   const uri = process.env.MONGODB_URI;
   if (!uri) {
-    throw new Error('Falta MONGODB_URI en el archivo .env (copiar .env.example y completarlo)');
+    throw new Error(
+      'Falta MONGODB_URI en el archivo .env (copiar .env.example y completarlo)',
+    );
   }
 
   // dbName se pasa como opción para no depender de cómo termina el connection string
   await mongoose.connect(uri, { dbName: process.env.DB_NAME || 'logistica' });
-  console.log(`Conexión exitosa a MongoDB Atlas (base: ${mongoose.connection.name})`);
+  console.log(
+    `Conexión exitosa a MongoDB Atlas (base: ${mongoose.connection.name})`,
+  );
 }
 
 export async function desconectar() {

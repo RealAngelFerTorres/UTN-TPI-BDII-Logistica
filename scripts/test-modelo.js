@@ -49,7 +49,12 @@ probar(Elemento, [
   ],
   [
     'Móvil sin subtipo/dominio/ploteado',
-    { ...camioneta, subtipo: undefined, dominio: undefined, ploteado: undefined },
+    {
+      ...camioneta,
+      subtipo: undefined,
+      dominio: undefined,
+      ploteado: undefined,
+    },
     ['dominio', 'ploteado', 'subtipo'],
   ],
   ['Móvil con nro_serie', { ...camioneta, nro_serie: 'X' }, ['nro_serie']],
@@ -58,8 +63,16 @@ probar(Elemento, [
     { ...ht, tipo_elemento: 'Dron', nro_serie: undefined, estado: 'perdido' },
     ['estado', 'tipo_elemento'],
   ],
-  ['Interno de más de 8 caracteres', { ...ht, interno: '123456789' }, ['interno']],
-  ['Dominio de más de 7 caracteres', { ...camioneta, dominio: 'AB123CDE' }, ['dominio']],
+  [
+    'Interno de más de 8 caracteres',
+    { ...ht, interno: '123456789' },
+    ['interno'],
+  ],
+  [
+    'Dominio de más de 7 caracteres',
+    { ...camioneta, dominio: 'AB123CDE' },
+    ['dominio'],
+  ],
 ]);
 
 const nuevo = new Elemento(camioneta);
@@ -80,7 +93,11 @@ const persona = {
 
 probar(Personal, [
   ['Personal válido', persona, []],
-  ['Jerarquía inexistente', { ...persona, jerarquia: 'Sargento' }, ['jerarquia']],
+  [
+    'Jerarquía inexistente',
+    { ...persona, jerarquia: 'Sargento' },
+    ['jerarquia'],
+  ],
   ['LP negativo', { ...persona, lp: -5 }, ['lp']],
   ['LP de más de 7 números', { ...persona, lp: 12345678 }, ['lp']],
   [
@@ -112,9 +129,17 @@ probar(Movimiento, [
   ['Movimiento válido', movimiento, []],
   ['Hora con formato inválido', { ...movimiento, hora: '8:30hs' }, ['hora']],
   ['Hora fuera de rango', { ...movimiento, hora: '25:00' }, ['hora']],
-  ['Tipo de movimiento inexistente', { ...movimiento, tipo_movimiento: 'Traslado' }, ['tipo_movimiento']],
+  [
+    'Tipo de movimiento inexistente',
+    { ...movimiento, tipo_movimiento: 'Traslado' },
+    ['tipo_movimiento'],
+  ],
   ['Sin elementos', { ...movimiento, elementos: [] }, ['elementos']],
-  ['Elemento repetido', { ...movimiento, elementos: [itemHT, itemHT] }, ['elementos']],
+  [
+    'Elemento repetido',
+    { ...movimiento, elementos: [itemHT, itemHT] },
+    ['elementos'],
+  ],
   [
     'Ítem móvil sin subtipo',
     { ...movimiento, elementos: [{ ...itemMovil, subtipo: undefined }] },

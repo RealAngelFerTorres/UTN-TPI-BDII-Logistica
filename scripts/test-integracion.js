@@ -33,13 +33,55 @@ async function main() {
 
   // Preparación
   const [agente, otroAgente, supervisor] = await Personal.create([
-    { lp: Number(`1${sufijo}`), jerarquia: 'Oficial', dni: '1', apellido: 'Prueba', nombre: 'Agente' },
-    { lp: Number(`2${sufijo}`), jerarquia: 'Oficial', dni: '2', apellido: 'Prueba', nombre: 'Otro' },
-    { lp: Number(`3${sufijo}`), jerarquia: 'Principal', dni: '3', apellido: 'Prueba', nombre: 'Supervisor' },
+    {
+      lp: Number(`1${sufijo}`),
+      jerarquia: 'Oficial',
+      dni: '1',
+      apellido: 'Prueba',
+      nombre: 'Agente',
+    },
+    {
+      lp: Number(`2${sufijo}`),
+      jerarquia: 'Oficial',
+      dni: '2',
+      apellido: 'Prueba',
+      nombre: 'Otro',
+    },
+    {
+      lp: Number(`3${sufijo}`),
+      jerarquia: 'Principal',
+      dni: '3',
+      apellido: 'Prueba',
+      nombre: 'Supervisor',
+    },
   ]);
-  const ht = await crearElemento({ tipo_elemento: 'HT', interno: `T${sufijo}`, marca: 'Motorola', modelo: 'MTP 3250', nro_serie: `S${sufijo}` });
-  const movil = await crearElemento({ tipo_elemento: 'Móvil', subtipo: 'camioneta', interno: `T${sufijo}`, marca: 'Ford', modelo: 'Ranger', dominio: 'AA000AA', ploteado: 'Identificable' });
-  const roto = await crearElemento({ tipo_elemento: 'HT', interno: `R${sufijo}`, marca: 'Sepura', modelo: 'STP9080', nro_serie: `R${sufijo}`, estado: 'En reparación' });
+
+  const ht = await crearElemento({
+    tipo_elemento: 'HT',
+    interno: `T${sufijo}`,
+    marca: 'Motorola',
+    modelo: 'MTP 3250',
+    nro_serie: `S${sufijo}`,
+  });
+
+  const movil = await crearElemento({
+    tipo_elemento: 'Móvil',
+    subtipo: 'camioneta',
+    interno: `T${sufijo}`,
+    marca: 'Ford',
+    modelo: 'Ranger',
+    dominio: 'AA000AA',
+    ploteado: 'Identificable',
+  });
+
+  const roto = await crearElemento({
+    tipo_elemento: 'HT',
+    interno: `R${sufijo}`,
+    marca: 'Sepura',
+    modelo: 'STP9080',
+    nro_serie: `R${sufijo}`,
+    estado: 'En reparación',
+  });
 
   const base = {
     fecha: new Date(),
@@ -47,10 +89,23 @@ async function main() {
     asignado: agente._id,
     supervisor: supervisor._id,
   };
+
   const salida = (ids, extra = {}) =>
-    crearMovimiento({ ...base, tipo_movimiento: 'Salida', elementos_ids: ids, ...extra });
+    crearMovimiento({
+      ...base,
+      tipo_movimiento: 'Salida',
+      elementos_ids: ids,
+      ...extra,
+    });
+
   const entrada = (ids, extra = {}) =>
-    crearMovimiento({ ...base, tipo_movimiento: 'Entrada', elementos_ids: ids, ...extra });
+    crearMovimiento({
+      ...base,
+      tipo_movimiento: 'Entrada',
+      elementos_ids: ids,
+      ...extra,
+    });
+
   const contarMovimientos = () => Movimiento.countDocuments();
 
   // ---------- CREATE de elementos ----------
@@ -58,7 +113,14 @@ async function main() {
   ok('crearElemento: el elemento nace en base');
 
   await assert.rejects(
-    () => crearElemento({ tipo_elemento: 'HT', interno: `T${sufijo}`, marca: 'X', modelo: 'Y', nro_serie: 'Z' }),
+    () =>
+      crearElemento({
+        tipo_elemento: 'HT',
+        interno: `T${sufijo}`,
+        marca: 'X',
+        modelo: 'Y',
+        nro_serie: 'Z',
+      }),
     /Ya existe un HT activo/,
   );
   ok('crearElemento: no permite repetir interno entre activos del mismo tipo');
@@ -69,7 +131,10 @@ async function main() {
   assert.equal(String(await asignadoA(movil)), String(agente._id));
   assert.deepEqual(
     mov.elementos.map((e) => [e.tipo_elemento, e.interno, e.subtipo]),
-    [['HT', `T${sufijo}`, undefined], ['Móvil', `T${sufijo}`, 'camioneta']],
+    [
+      ['HT', `T${sufijo}`, undefined],
+      ['Móvil', `T${sufijo}`, 'camioneta'],
+    ],
   );
   ok('Salida: asigna los elementos y embebe tipo, interno y subtipo');
 
@@ -79,9 +144,18 @@ async function main() {
   ok('Salida: rechaza un elemento ya asignado sin guardar el movimiento');
 
   // Transacción: un elemento válido + uno en reparación -> no se aplica nada
-  const libre = await crearElemento({ tipo_elemento: 'HT', interno: `L${sufijo}`, marca: 'Motorola', modelo: 'MTP 3250', nro_serie: `L${sufijo}` });
+  const libre = await crearElemento({
+    tipo_elemento: 'HT',
+    interno: `L${sufijo}`,
+    marca: 'Motorola',
+    modelo: 'MTP 3250',
+    nro_serie: `L${sufijo}`,
+  });
   antes = await contarMovimientos();
-  await assert.rejects(() => salida([libre._id, roto._id]), /no está operativo/);
+  await assert.rejects(
+    () => salida([libre._id, roto._id]),
+    /no está operativo/,
+  );
   assert.equal(await asignadoA(libre), null);
   assert.equal(await contarMovimientos(), antes);
   ok('Salida: si un elemento falla, la transacción no asigna ninguno');
@@ -96,7 +170,10 @@ async function main() {
   ok('Salida: el supervisor tiene que ser personal activo');
 
   // ---------- DELETE lógico de un elemento asignado ----------
-  await assert.rejects(() => eliminarElemento(ht._id, 'Prueba'), /está asignado/);
+  await assert.rejects(
+    () => eliminarElemento(ht._id, 'Prueba'),
+    /está asignado/,
+  );
   ok('eliminarElemento: no da de baja un elemento asignado');
 
   // ---------- Entrada ----------
@@ -121,10 +198,14 @@ async function main() {
   const listado = await listarMovimientos({ asignado: agente._id });
   assert.equal(listado.length, 2);
   assert.equal(listado[0].tipo_movimiento, 'Entrada'); // más reciente primero
-  ok('listarMovimientos: trae los movimientos activos, del más reciente al más antiguo');
+  ok(
+    'listarMovimientos: trae los movimientos activos, del más reciente al más antiguo',
+  );
 
   // ---------- UPDATE ----------
-  const actualizado = await actualizarMovimiento(mov._id, { observaciones: 'Corregido' });
+  const actualizado = await actualizarMovimiento(mov._id, {
+    observaciones: 'Corregido',
+  });
   assert.equal(actualizado.observaciones, 'Corregido');
   await assert.rejects(
     () => actualizarMovimiento(mov._id, { tipo_movimiento: 'Entrada' }),
@@ -138,18 +219,31 @@ async function main() {
   assert.ok(anulado.fecha_eliminacion instanceof Date);
   assert.ok(await Movimiento.findById(mov._id));
   assert.equal((await listarMovimientos({ asignado: agente._id })).length, 1);
-  ok('eliminarMovimiento: baja lógica; el READ ya no lo lista pero sigue en la base');
+  ok(
+    'eliminarMovimiento: baja lógica; el READ ya no lo lista pero sigue en la base',
+  );
 
   // ---------- DELETE lógico de elemento ----------
   await eliminarElemento(ht._id, 'Prueba de integración');
   await assert.rejects(() => salida([ht._id]), /no existe o está dado de baja/);
   ok('Un elemento dado de baja no puede tener movimientos nuevos');
 
-  await crearElemento({ tipo_elemento: 'HT', interno: `T${sufijo}`, marca: 'Motorola', modelo: 'MTP 3250', nro_serie: `N${sufijo}` });
-  ok('Índice parcial: el interno de un elemento dado de baja se puede reutilizar');
+  await crearElemento({
+    tipo_elemento: 'HT',
+    interno: `T${sufijo}`,
+    marca: 'Motorola',
+    modelo: 'MTP 3250',
+    nro_serie: `N${sufijo}`,
+  });
+  ok(
+    'Índice parcial: el interno de un elemento dado de baja se puede reutilizar',
+  );
 
   // ---------- DELETE lógico de personal ----------
-  const baja = await eliminarPersonal(otroAgente._id, 'Pase a otra dependencia');
+  const baja = await eliminarPersonal(
+    otroAgente._id,
+    'Pase a otra dependencia',
+  );
   assert.equal(baja.isEliminado, true);
   assert.ok(baja.fecha_eliminacion instanceof Date);
   await assert.rejects(
