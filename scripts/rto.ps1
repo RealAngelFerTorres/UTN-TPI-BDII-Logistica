@@ -1,7 +1,9 @@
 # Script para medir el RTO (Recovery Time Objective) de la restauración de la base de datos de prueba
-# IMPORTANTE: Se intentará restaurar en la carpeta con la fecha de hoy
-#             No debe existir el backup en mongodb            
-
+# IMPORTANTE:
+# Se intentará restaurar a partir de archivo ubicado en carpeta con fecha de hoy
+# Si ya hay una db restaurada por este script, entonces no se restaurará nada
+# Se recomienda hacer un drop de la base restaurada para ver los tiempos de RTO
+          
 $ErrorActionPreference = "Stop"
 
 # ---------- 1. Raíz del proyecto ----------
