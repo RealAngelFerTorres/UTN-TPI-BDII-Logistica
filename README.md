@@ -66,3 +66,6 @@ UTN-TPI-BDII-Logistica/
 CONSEJO: Se recomienda que la terminal no ajuste con salto de línea para mejor
 visualización de las tablas (hacer un cls -clear screen- y luego
 presionar ALT + Z en la terminal)
+
+Con respecto al RTO: No tiene que haber una base restaurada, en ese caso no
+se restaurará nada.
