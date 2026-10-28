@@ -1,8 +1,7 @@
 # scripts\backup.ps1 - Resguardo de la base de datos de MongoDB Atlas con mongodump
-# Uso (desde la raíz del proyecto):  .\scripts\backup.ps1
 # Requiere: MongoDB Database Tools (mongodump en el PATH) y un archivo .env en la raíz con
-#   MONGODB_URI=mongodb+srv://USUARIO:PASSWORD@cluster...mongodb.net/?retryWrites=true&w=majority
-#   DB_NAME=comisaria_db
+# MONGODB_URI=mongodb+srv://USUARIO:PASSWORD@cluster...mongodb.net/?retryWrites=true&w=majority
+# DB_NAME=logistica
 
 $ErrorActionPreference = "Stop"
 
@@ -41,15 +40,3 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 Write-Host "Backup completado: $destino\$($env:DB_NAME)"
-
-
-# Script para restaurar la base de datos de prueba desde el resguardo
-# Se tiene que cambiar la fecha en la ruta del resguardo según corresponda
-mongorestore --uri="$env:MONGODB_URI" --nsFrom="logistica.*" --nsTo="logistica_test.*" .\resguardos_tpi\2026-10-20
-
-
-# Script para medir el RTO (Recovery Time Objective) de la restauración de la base de datos de prueba
-# Se tiene que cambiar la fecha en la ruta del resguardo según corresponda
-Measure-Command {
-  mongorestore --uri="$env:MONGODB_URI" --nsFrom="logistica.*" --nsTo="logistica_test.*" .\resguardos_tpi\2026-10-20
-}

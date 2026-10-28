@@ -31,7 +31,16 @@ UTN-TPI-BDII-Logistica/
     ├── demo-elementos.js         → Demo de alta y baja lógica contra Atlas
     ├── test-modelo.js            → Prueba las validaciones sin conectarse
     ├── test-integracion.js       → Prueba los servicios contra Atlas (base logistica_pruebas)
-    └── backup.ps1                → Backup con mongodump en resguardos_tpi/<fecha>
+    ├── main-create.js            → Demostración CREATE
+    ├── main-read.js              → Demostración READ
+    ├── main-update.js            → Demostración UPDATE
+    ├── main-delete.js            → Demostración DELETE
+    └── backup.ps1                → Backup con mongodump en resguardos_tpi/
+    <fecha>
+    └── restore.ps1               → Restauración de la db del dia de <hoy>
+    └── rto.ps1                   → Idem anterior, con RTO
+
+
 ```
 
 ## 💻 Ejecución del proyecto
@@ -46,4 +55,14 @@ UTN-TPI-BDII-Logistica/
 | `npm run seed`             | Carga personal, elementos y movimientos ficticios (se puede repetir sin duplicar) |
 | `npm run demo:elementos`   | Crea un HT, lo da de baja lógica y muestra que sigue en la base                   |
 | `npm run test:integracion` | Prueba las reglas de negocio de los servicios contra Atlas                        |
-| `.\scripts\backup.ps1`     | Genera el backup en `resguardos_tpi/<fecha>` (requiere MongoDB Database Tools)    |
+| `npm run main-create`      | Demostración de la función CREATE                                                 |
+| `npm run main-read`        | Demostración de la función UPDATE                                                 |
+| `npm run main-update`      | Demostración de la función UPDATE                                                 |
+| `npm run main-delete`      | Demostración de la función DELETE                                                 |
+| `npm run backup`           | Genera el backup en `resguardos_tpi/<fecha>` (requiere MongoDB Database Tools)    |
+| `npm run restore`          | Restaura la db a partir del backup creado del dia de la fecha                     |
+| `npm run rto`              | Restaura la db a partir del backup creado del dia de la fecha y muestra el RTO    |
+
+CONSEJO: Se recomienda que la terminal no ajuste con salto de línea para mejor
+visualización de las tablas (hacer un cls -clear screen- y luego
+presionar ALT + Z en la terminal)

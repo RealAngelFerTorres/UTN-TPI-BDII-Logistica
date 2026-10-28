@@ -8,7 +8,10 @@
     "main-create": "node scripts/main-create.js",
     "main-read": "node scripts/main-read.js",
     "main-update": "node scripts/main-update.js",
-    "main-delete": "node scripts/main-delete.js"
+    "main-delete": "node scripts/main-delete.js",
+    "backup": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/backup.ps1",
+    "restore": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/restore.ps1",
+    "rto": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/rto.ps1"
   },
   "dependencies": {
     "dotenv": "^18.0.8",
