@@ -10,8 +10,24 @@ const errores = (Modelo, datos) =>
 
 function probar(Modelo, casos) {
   for (const [nombre, datos, esperado] of casos) {
-    assert.deepEqual(errores(Modelo, datos), esperado, nombre);
-    console.log(`ok - ${Modelo.modelName}: ${nombre}`);
+    const documento = new Modelo(datos);
+    const validacion = documento.validateSync();
+
+    const erroresReales = Object.keys(validacion?.errors ?? {}).sort();
+
+    assert.deepEqual(erroresReales, esperado, nombre);
+
+    console.log(`✅ ${Modelo.modelName}: ${nombre}`);
+
+    if (erroresReales.length > 0) {
+      for (const campo of erroresReales) {
+        const error = validacion.errors[campo];
+
+        console.log(
+          `   ❌ Campo: ${campo} | Tipo: ${error.kind} | Valor: ${error.value} |\n   ${error.message}`,
+        );
+      }
+    }
   }
 }
 
@@ -165,10 +181,10 @@ for (const Modelo of [Elemento, Personal, Movimiento]) {
     () => Modelo.findOneAndDelete({}),
     /Borrado físico prohibido/,
   );
-  console.log(`ok - ${Modelo.modelName}: borrado físico bloqueado`);
+  console.log(`✅ - ${Modelo.modelName}: borrado físico bloqueado`);
 }
 await assert.rejects(() => nuevo.deleteOne(), /Borrado físico prohibido/);
-console.log('ok - Elemento: doc.deleteOne() bloqueado');
+console.log('✅ - Elemento: doc.deleteOne() bloqueado');
 
-console.log('\nTodas las validaciones pasan.');
+console.log('\n🏁 Todas las validaciones pasan.');
 process.exit(0);
