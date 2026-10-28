@@ -5,7 +5,8 @@
     "demo:elementos": "node scripts/demo-elementos.js",
     "test:modelo": "node scripts/test-modelo.js",
     "test:integracion": "node scripts/test-integracion.js",
-    "main": "node scripts/main.js"
+    "main-create": "node scripts/main-create.js",
+    "main-read": "node scripts/main-read.js"
   },
   "dependencies": {
     "dotenv": "^18.0.8",
