@@ -36,8 +36,8 @@ UTN-TPI-BDII-Logistica/
     ├── main-update.js            → Demostración UPDATE
     ├── main-delete.js            → Demostración DELETE
     └── backup.ps1                → Backup con mongodump en resguardos_tpi/<fecha>
-    └── restore.ps1               → Restauración de la db del dia de <hoy>
-    └── rto.ps1                   → Idem anterior, con RTO
+    ├── restore.ps1               → Restauración de la DB del día de hoy
+    └── rto.ps1                   → Ídem anterior, con medición del RTO
 
 
 ```
