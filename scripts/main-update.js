@@ -221,7 +221,12 @@ function mostrarResumen(resultados, elementosVerificados) {
     `Elementos encontrados en la verificación: ${elementosVerificados.length}`,
   );
 
-  const todosEncontrados = elementosVerificados.length === asignaciones.length;
+  const internosSolicitados = movimientos.flatMap(
+    (movimiento) => movimiento.internos,
+  );
+
+  const todosEncontrados =
+    elementosVerificados.length === internosSolicitados.length;
 
   const sinFallos = resultados.fallidos === 0;
 
