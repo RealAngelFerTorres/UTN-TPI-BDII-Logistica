@@ -35,7 +35,7 @@ UTN-TPI-BDII-Logistica/
     ├── main-read.js              → Demostración READ
     ├── main-update.js            → Demostración UPDATE
     ├── main-delete.js            → Demostración DELETE
-    └── backup.ps1                → Backup con mongodump en resguardos_tpi/<fecha>
+    ├── backup.ps1                → Backup con mongodump en resguardos_tpi/<fecha>
     ├── restore.ps1               → Restauración de la DB del día de hoy
     └── rto.ps1                   → Ídem anterior, con medición del RTO
 
@@ -55,7 +55,7 @@ UTN-TPI-BDII-Logistica/
 | `npm run demo:elementos`   | Crea un HT, lo da de baja lógica y muestra que sigue en la base                   |
 | `npm run test:integracion` | Prueba las reglas de negocio de los servicios contra Atlas                        |
 | `npm run main-create`      | Demostración de la función CREATE                                                 |
-| `npm run main-read`        | Demostración de la función UPDATE                                                 |
+| `npm run main-read`        | Demostración de la función READ                                                  |
 | `npm run main-update`      | Demostración de la función UPDATE                                                 |
 | `npm run main-delete`      | Demostración de la función DELETE                                                 |
 | `npm run backup`           | Genera el backup en `resguardos_tpi/<fecha>` (requiere MongoDB Database Tools)    |
