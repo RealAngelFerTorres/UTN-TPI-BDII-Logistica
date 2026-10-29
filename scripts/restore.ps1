@@ -1,4 +1,4 @@
-# Script para restaurar la base de datos de prueba desde el resguardo
+﻿# Script para restaurar la base de datos de prueba desde el resguardo
 # IMPORTANTE:
 # Se intentará restaurar a partir de archivo ubicado en carpeta con fecha de hoy
 # Si ya hay una db restaurada por este script, entonces no se restaurará nada

@@ -1,4 +1,4 @@
-# Script para medir el RTO (Recovery Time Objective) de la restauración de la base de datos de prueba
+﻿# Script para medir el RTO (Recovery Time Objective) de la restauración de la base de datos de prueba
 # IMPORTANTE:
 # Se intentará restaurar a partir de archivo ubicado en carpeta con fecha de hoy
 # Si ya hay una db restaurada por este script, entonces no se restaurará nada

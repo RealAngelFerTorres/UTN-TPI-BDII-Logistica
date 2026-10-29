@@ -1,4 +1,4 @@
-# scripts\backup.ps1 - Resguardo de la base de datos de MongoDB Atlas con mongodump
+﻿# scripts\backup.ps1 - Resguardo de la base de datos de MongoDB Atlas con mongodump
 # Requiere: MongoDB Database Tools (mongodump en el PATH) y un archivo .env en la raíz con
 # MONGODB_URI=mongodb+srv://USUARIO:PASSWORD@cluster...mongodb.net/?retryWrites=true&w=majority
 # DB_NAME=logistica
