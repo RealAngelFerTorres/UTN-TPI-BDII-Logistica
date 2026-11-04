@@ -7,6 +7,7 @@
     "test:integracion": "node scripts/test-integracion.js",
     "main-create": "node scripts/main-create.js",
     "main-read": "node scripts/main-read.js",
+    "main-read-ultimos": "node scripts/main-read-ultimos.js",
     "main-update": "node scripts/main-update.js",
     "main-delete": "node scripts/main-delete.js",
     "backup": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/backup.ps1",
