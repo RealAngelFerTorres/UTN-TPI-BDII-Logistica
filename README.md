@@ -49,19 +49,20 @@ UTN-TPI-BDII-Logistica/
 2. Copiar `.env.example` como `.env` y completar `MONGODB_URI` con el connection string de Atlas.
 3. Comandos disponibles:
 
-| Comando                    | Qué hace                                                                          |
-| -------------------------- | --------------------------------------------------------------------------------- |
-| `npm run test:modelo`      | Valida los esquemas (no necesita Atlas)                                           |
-| `npm run seed`             | Carga personal, elementos y movimientos ficticios (se puede repetir sin duplicar) |
-| `npm run demo:elementos`   | Crea un HT, lo da de baja lógica y muestra que sigue en la base                   |
-| `npm run test:integracion` | Prueba las reglas de negocio de los servicios contra Atlas                        |
-| `npm run main-create`      | Demostración de la función CREATE                                                 |
-| `npm run main-read`        | Demostración de la función READ                                                   |
-| `npm run main-update`      | Demostración de la función UPDATE                                                 |
-| `npm run main-delete`      | Demostración de la función DELETE                                                 |
-| `npm run backup`           | Genera el backup en `resguardos_tpi/<fecha>` (requiere MongoDB Database Tools)    |
-| `npm run restore`          | Restaura la db a partir del backup creado del dia de la fecha                     |
-| `npm run rto`              | Restaura la db a partir del backup creado del dia de la fecha y muestra el RTO    |
+| Comando                     | Qué hace                                                                          |
+| --------------------------- | --------------------------------------------------------------------------------- |
+| `npm run test:modelo`       | Valida los esquemas (no necesita Atlas)                                           |
+| `npm run seed`              | Carga personal, elementos y movimientos ficticios (se puede repetir sin duplicar) |
+| `npm run demo:elementos`    | Crea un HT, lo da de baja lógica y muestra que sigue en la base                   |
+| `npm run test:integracion`  | Prueba las reglas de negocio de los servicios contra Atlas                        |
+| `npm run main-create`       | Demostración de la función CREATE                                                 |
+| `npm run main-read`         | Demostración de la función READ                                                   |
+| `npm run main-read-ultimos` | Demostración de la función READ leyendo los últimos 100 movimientos               |
+| `npm run main-update`       | Demostración de la función UPDATE                                                 |
+| `npm run main-delete`       | Demostración de la función DELETE                                                 |
+| `npm run backup`            | Genera el backup en `resguardos_tpi/<fecha>` (requiere MongoDB Database Tools)    |
+| `npm run restore`           | Restaura la db a partir del backup creado del dia de la fecha                     |
+| `npm run rto`               | Restaura la db a partir del backup creado del dia de la fecha y muestra el RTO    |
 
 CONSEJO: Se recomienda que la terminal no ajuste con salto de línea para mejor
 visualización de las tablas (hacer un cls -clear screen- y luego
